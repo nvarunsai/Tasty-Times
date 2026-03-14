@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Times | Best Chinese Restaurant in Vijayawada</title>
+    <meta name="description"
+        content="Premium Chinese flavors at street-friendly prices (₹1–200) in Vijayawada. Dine-in and home delivery available.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Section 1: Sticky Navigation Bar -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                Tasty Times <i class="fa-solid fa-bowl-food"
+                    style="color: var(--primary); font-size: 0.8em; margin-left: 5px;"></i>
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#location">Find Us</a>
+                <a href="#order" class="btn btn-primary pill nav-cta">Order Now</a>
+            </nav>
+            <!-- Cart Button -->
+            <button class="cart-trigger" id="cartBtn" aria-label="Open cart">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+            </button>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== CART DRAWER ===== -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Your Order</h3>
+            <button id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <p class="cart-empty" id="cartEmpty">Your cart is empty. Add items from the menu above!</p>
+        <ul class="cart-items-list" id="cartItemsList"></ul>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <strong id="cartTotal">₹0</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn" disabled>
+                Proceed to Order
+            </button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- ===== ORDER MODAL ===== -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-modal-box">
+            <div class="order-modal-header">
+                <h3>Complete Your Order</h3>
+                <button id="closeOrderModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modalOrderSummary" class="modal-order-summary"></div>
+            <form id="orderForm" class="order-form" novalidate>
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" name="customerName" placeholder="e.g. Ravi Kumar" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="e.g. 9876543210" required>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address *</label>
+                    <textarea name="address" rows="2" placeholder="Your full address in Vijayawada" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Special Notes <span style="color:#888;">(optional)</span></label>
+                    <textarea name="notes" rows="2" placeholder="e.g. Less spicy, extra sauce…"></textarea>
+                </div>
+                <div id="orderStatus" class="order-status"></div>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top:12px;">
+                    Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <button class="close-menu"><i class="fa-solid fa-xmark"></i></button>
+        <div class="drawer-links">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About</a>
+            <a href="#location">Find Us</a>
+            <a href="#order" class="btn btn-primary pill">Order Now</a>
+        </div>
+    </div>
+
+    <!-- Section 2: Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">Authentic Chinese Flavors in the Heart of Vijayawada</h1>
+            <p class="hero-subtitle">Delicious, affordable, and freshly prepared Chinese meals perfect for dine-in or
+                delivery.</p>
+            <div class="hero-ctas">
+                <a href="#order" class="btn btn-primary btn-large">Order Now</a>
+                <a href="#location" class="btn btn-outline btn-large">Get Directions</a>
+            </div>
+            <div class="trust-badges">
+                <span>⭐ 4.6 Customer Rating</span>
+                <span class="dot">•</span>
+                <span>🍜 Authentic Chinese Cuisine</span>
+                <span class="dot">•</span>
+                <span>💰 Budget Friendly</span>
+                <span class="dot">•</span>
+                <span>🚚 Delivery Available</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Social Proof Bar -->
+    <section class="social-proof">
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <div class="ticker-item"><i class="fa-solid fa-star"></i> 4.6 Stars on Google</div>
+                <div class="ticker-item"><i class="fa-solid fa-heart"></i> 10+ Happy Reviews</div>
+                <div class="ticker-item"><i class="fa-solid fa-utensils"></i> Dine-in & Delivery</div>
+                <div class="ticker-item"><i class="fa-solid fa-door-open"></i> Open Every Day</div>
+                <div class="ticker-item"><i class="fa-solid fa-wallet"></i> ₹1–₹200 per person</div>
+                <!-- Duplicate for infinite scroll -->
+                <div class="ticker-item"><i class="fa-solid fa-star"></i> 4.6 Stars on Google</div>
+                <div class="ticker-item"><i class="fa-solid fa-heart"></i> 10+ Happy Reviews</div>
+                <div class="ticker-item"><i class="fa-solid fa-utensils"></i> Dine-in & Delivery</div>
+                <div class="ticker-item"><i class="fa-solid fa-door-open"></i> Open Every Day</div>
+                <div class="ticker-item"><i class="fa-solid fa-wallet"></i> ₹1–₹200 per person</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Why Tasty Times? -->
+    <section class="value-prop section-padding text-center">
+        <div class="container">
+            <h2 class="section-title">Why Vijayawada Keeps Coming Back</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-wrap"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Fresh & Flavorful</h3>
+                    <p>Every dish prepared fresh with authentic flavors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrap"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Great food that fits every budget.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Quick Service</h3>
+                    <p>Perfect for quick lunch or dinner.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-wrap"><i class="fa-solid fa-motorcycle"></i></div>
+                    <h3>Delivery Available</h3>
+                    <p>Enjoy your favorite Chinese dishes at home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Signature Menu Highlights -->
+    <section class="menu-highlights section-padding bg-light" id="menu">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Our Popular Dishes</h2>
+                <p class="section-subtitle">Crowd favorites that keep our guests coming back for more</p>
+            </div>
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="assets/images/fried_rice.png"
+                            alt="Chicken Fried Rice" loading="lazy">
+                        <div class="price-badge">₹190</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Chicken Fried Rice</h3>
+                        <p>Classic wok-tossed rice with tender chicken, egg, and fresh veggies.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="assets/images/noodles.png"
+                            alt="Veg Noodles" loading="lazy">
+                        <div class="price-badge">₹150</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Hakka Veg Noodles</h3>
+                        <p>Street-style noodles tossed with crunchy cabbage, bell peppers, and soy.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="assets/images/manchurian.png"
+                            alt="Manchurian Gravy" loading="lazy">
+                        <div class="price-badge">₹180</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Manchurian Gravy</h3>
+                        <p>Crispy veg dumplings in a rich, tangy, and mildly spicy soy-garlic sauce.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="assets/images/spring_rolls.png"
+                            alt="Spring Rolls" loading="lazy">
+                        <div class="price-badge">₹120</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Crispy Spring Rolls</h3>
+                        <p>Golden-fried rolls stuffed with seasoned shredded vegetables.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1525755669778-98e94a5e01bd?auto=format&fit=crop&q=80&w=600"
+                            alt="Chilli Chicken" loading="lazy">
+                        <div class="price-badge">₹199</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Spicy Chilli Chicken</h3>
+                        <p>Juicy chicken chunks wok-tossed with green chillies, onions, and capsicum.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="menu-card">
+                    <div class="menu-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=600"
+                            alt="Egg Noodles" loading="lazy">
+                        <div class="price-badge">₹160</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Egg Hakka Noodles</h3>
+                        <p>Flavorful noodles tossed with scrambled egg and fresh spring onions.</p>
+                        <button class="btn btn-outline btn-block mt-3">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#menu" class="text-link">See Full Menu <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: About the Restaurant -->
+    <section class="about section-padding" id="about">
+        <div class="container container-split">
+            <div class="about-img">
+                <img src="assets/images/interior.png"
+                    alt="Restaurant Atmosphere" loading="lazy">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">Welcome to Tasty Times</h2>
+                <div class="rating-display">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <strong>4.6 / 5</strong> <span class="text-muted">Based on Google Reviews</span>
+                </div>
+                <p>Tasty Times is a beloved local Chinese restaurant in Vijayawada known for serving flavorful dishes at
+                    affordable prices. Whether you're stopping by for a quick meal, meeting friends, or ordering food
+                    for home, we make sure every plate is packed with taste and freshness.</p>
+                <ul class="info-list mt-3" style="gap: 15px; margin-bottom: 2rem;">
+                    <li style="align-items: center;"><i class="fa-solid fa-check" style="color: var(--primary);"></i>
+                        <strong>Affordable Chinese food</strong></li>
+                    <li style="align-items: center;"><i class="fa-solid fa-check" style="color: var(--primary);"></i>
+                        <strong>Quick service</strong></li>
+                    <li style="align-items: center;"><i class="fa-solid fa-check" style="color: var(--primary);"></i>
+                        <strong>Comfortable dine-in atmosphere</strong></li>
+                    <li style="align-items: center;"><i class="fa-solid fa-check" style="color: var(--primary);"></i>
+                        <strong>Convenient delivery options</strong></li>
+                </ul>
+                <a href="#location" class="btn btn-primary mt-3">Visit Us Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Customer Reviews -->
+    <section class="reviews section-padding bg-light text-center">
+        <div class="container">
+            <h2 class="section-title">What Our Guests Are Saying</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <p class="review-text">"Great taste and affordable prices. Perfect place for quick Chinese food."
+                    </p>
+                    <div class="reviewer">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <strong>Rahul Sharma</strong>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <i class="fa-solid fa-quote-left quote-icon"></i>
+                    <p class="review-text">"Loved the noodles and fried rice. Fast service and good quantity."</p>
+                    <div class="reviewer">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <strong>Priya Reddy</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="https://www.google.com/search?q=Tasty+Times+Vijayawada+reviews" target="_blank"
+                    class="btn btn-outline"><i class="fa-brands fa-google"></i> Read All Reviews on Google <i
+                        class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7.5: Gallery Section -->
+    <section class="gallery section-padding bg-light text-center" id="gallery">
+        <div class="container">
+            <h2 class="section-title">A Glimpse of Tasty Times</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/noodles.png"
+                        alt="Chinese noodles dishes" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/fried_rice.png"
+                        alt="Fried rice plates" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/interior.png"
+                        alt="Restaurant interior" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/spring_rolls.png"
+                        alt="Spring rolls" loading="lazy">
+                </div>
+                <div class="gallery-item gallery-item-large">
+                    <img src="assets/images/manchurian.png"
+                        alt="Manchurian" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Visit Us / Location -->
+    <section class="location section-padding" id="location">
+        <div class="container container-split align-start">
+            <div class="location-info">
+                <h2 class="section-title">Find Us Here</h2>
+                <ul class="info-list">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>Address</strong>
+                            <p>32-15-44, Bramanadha Reddy Nagar St,<br>Seetharampuram, Vijayawada – 520010</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong>
+                            <p><a href="tel:08897928318">088979 28318</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-clock"></i>
+                        <div>
+                            <strong>Hours</strong>
+                            <p>Monday–Sunday<br>12:00 PM – 11:00 PM</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-utensils"></i>
+                        <div>
+                            <strong>Services</strong>
+                            <p>Dine-In Available | Delivery Available</p>
+                        </div>
+                    </li>
+                </ul>
+                <a href="https://maps.google.com/?q=32-15-44,+Bramanadha+Reddy+Nagar+St,+Seetharampuram,+Vijayawada"
+                    target="_blank" class="btn btn-primary mt-3"><i class="fa-solid fa-map-location-dot"></i> Get
+                    Directions</a>
+            </div>
+            <div class="location-map">
+                <!-- Using a visually appealing placeholder iframe since we don't have the exact Google Maps embed URL -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1134.1155700779774!2d80.62776831486718!3d16.515206988606622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35f0003b128bb1%3A0xc479e000490b82eb!2sSeetharampuram%2C%20Vijayawada%2C%20Andhra%20Pradesh%20520010!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
+                    width="100%" height="450"
+                    style="border:0; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Order CTA Banner -->
+    <section class="cta-banner text-center" id="order">
+        <div class="cta-overlay"></div>
+        <div class="container cta-content">
+            <h2 class="cta-title">Craving Chinese? Order Now!</h2>
+            <p class="cta-subtitle">Enjoy your favorite dishes from Tasty Times delivered fresh and hot.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 2rem;">
+                <a href="#menu" class="btn btn-primary btn-xl">Order Food</a>
+                <a href="tel:08897928318" class="btn btn-white btn-xl"><i class="fa-solid fa-phone-volume"></i> Call for
+                    Delivery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo text-white">
+                        Tasty Times <i class="fa-solid fa-bowl-food"
+                            style="color: var(--primary); font-size: 0.8em; margin-left: 5px;"></i>
+                    </a>
+                    <p class="tagline mt-2">Tasty Times – Delicious Chinese Food in Vijayawada.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 15px; font-size: 1.5rem;">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#location">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>32-15-44, Bramanadha Reddy Nagar St,<br>Seetharampuram, Vijayawada – 520010</p>
+                    <p class="mt-2"><a href="tel:08897928318"><i class="fa-solid fa-phone"></i> 088979 28318</a></p>
+                </div>
+                <div class="footer-hours">
+                    <h3>Hours</h3>
+                    <p><i class="fa-regular fa-clock"></i> Mon - Sun</p>
+                    <p>12:00 PM - 11:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tasty Times, Vijayawada. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/918897928318" target="_blank" class="whatsapp-float bg-success">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="Script.js"></script>
+    <script type="module">
+        import { initCart } from "./js/cart.js";
+        document.addEventListener("DOMContentLoaded", initCart);
+        document.getElementById("cartOverlay")?.addEventListener("click", () => {
+            document.getElementById("cartDrawer").classList.remove("active");
+        });
+    </script>
+</body>
+
+</html>
